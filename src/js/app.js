@@ -29,7 +29,22 @@ App = {
       // Set the provider for the contract
       App.contracts.Election.setProvider(App.web3Provider);
       console.log("Contract initialized...");
+      App.listenForEvents();
       App.render();
+    });
+  },
+
+  // Listen for events emitted from the contract
+  listenForEvents: function () {
+    App.contracts.Election.deployed().then(function (instance) {
+      instance.votedEvent({}, {
+        fromBlock: 0,
+        toBlock: 'latest'
+      }).watch(function (error, event) {
+        console.log("event triggered", event)
+        // Reload when a new vote is recorded
+        App.render();
+      });
     });
   },
 
