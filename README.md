@@ -36,7 +36,7 @@ This project requires the following dependencies:
 
 # ERRORS
 1. **Running: `truffle migrate`**
-   ![Screen Shot 2024-06-09 at 20 22](https://github.com/Sequence-94/election-app/assets/53806574/b56f7597-ea37-41b8-9842-18abd92a4a62)
+   - ![Screen Shot 2024-06-09 at 20 22](https://github.com/Sequence-94/election-app/assets/53806574/b56f7597-ea37-41b8-9842-18abd92a4a62)
 
    - **Issue** :I used `function Election()` as the constructor
    - **Resolution** : Replaced `function Election() public` with `constructor() public`, which is the recommended way to define constructors in Solidity from version 0.5.0 onwards.
@@ -44,4 +44,8 @@ This project requires the following dependencies:
    - ![Screen Shot 2024-06-09 at 20 30](https://github.com/Sequence-94/election-app/assets/53806574/0dd079a1-1ad4-41ef-b8f9-6773d1012906)
    - ![Screen Shot 2024-06-09 at 20 30 - 2](https://github.com/Sequence-94/election-app/assets/53806574/a015b7a9-2571-40b4-927b-9ca68cdd221d)
 
-   
+2. **Running: `truffle migrate`**
+   - ![Screen Shot 2024-06-10 at 11 21](https://github.com/Sequence-94/election-app/assets/53806574/b106174a-fcdf-4c87-bf0f-aa7d67ef115a)
+   - **Issue** :The `addCandidate` function uses `string _name` which should be `string memory _name` to be compliant with Solidity versions 0.5.0 and later.
+   - **Resolution** : Resolution: replaced `function addCandidate(string _name) private` with  `function addCandidate(string memory _name) public`
+
