@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.1.15",
+    "aws-amplify": "^6.3.6",
     "dotenv": "^16.4.5"
   }
 }
