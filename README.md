@@ -9,7 +9,7 @@ This DApp allows users to vote securely and transparently on the Ethereum blockc
 ### Prerequisites
 - [MetaMask](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn)
 - [Alchemy](https://dashboard.alchemy.com/)
-- 
+
 
 
 ## Setup Instructions
@@ -25,6 +25,7 @@ This DApp allows users to vote securely and transparently on the Ethereum blockc
 
 
 5. **Create a metamask account**
+   - IMPORTANT **save your mnemonic from metamask** YOU'LL NEED IT LATER
    - nagivate to -> networks > Add a network > Add a network manually
    
    ![Screen Shot 2024-06-14 at 11 51](https://github.com/Sequence-94/election-app/assets/53806574/0dab21c3-0607-4fd3-a9a6-2ee1556f407b)
