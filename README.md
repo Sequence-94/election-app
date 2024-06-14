@@ -51,4 +51,34 @@ This DApp allows users to vote securely and transparently on the Ethereum blockc
  ALCHEMY_API_KEY="your alchemy api key here"
 ```
 
+7. **Don't forget to add .env inside the .gitignore file**
 
+8. ## Changes Required for Deployment on Holesky Testnet
+
+### 1. `truffle-config.js`
+
+Updated to include the Holesky network configuration:
+```javascript
+require('dotenv').config();
+const { MNEMONIC, ALCHEMY_API_KEY } = process.env;
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+
+module.exports = {
+  networks: {
+    holesky: {
+      provider: () => new HDWalletProvider(MNEMONIC, `https://eth-holesky.alchemyapi.io/v2/${ALCHEMY_API_KEY}`),
+      network_id: 17000,       // Holesky's id
+      confirmations: 2,        // # of confirmations to wait between deployments. (default: 0)
+      timeoutBlocks: 200,      // # of blocks before a deployment times out  (minimum/default: 50)
+      networkCheckTimeout: 1000000000, // # of milliseconds before a network check times out
+      skipDryRun: true,        // Skip dry run before migrations? (default: false for public nets )
+      pollingInterval: 5000    // Polling interval in milliseconds (default: 4000)
+    }
+  },
+  compilers: {
+    solc: {
+      version: "0.8.17" // Fetch exact version from solc-bin (default: truffle's version)
+    }
+  }
+};
+```
