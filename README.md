@@ -35,6 +35,8 @@ This DApp allows users to vote securely and transparently on the Ethereum blockc
    
    ![Screen Shot 2024-06-14 at 11 57](https://github.com/Sequence-94/election-app/assets/53806574/fd927760-c2d2-4e51-a3b8-65e2bb92297c)
 
+
+   **Choose Your Faucet**
    - [Alchemy](https://www.alchemy.com/faucets)
    - [Infura](https://www.infura.io/faucet/sepolia)
    - [Google Cloud Web3](https://cloud.google.com/application/web3/)(recommended)
