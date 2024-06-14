@@ -11,7 +11,7 @@ This DApp allows users to vote securely and transparently on the Ethereum blockc
 - [Node.js](https://nodejs.org/)
 - [Truffle](https://www.trufflesuite.com/truffle)
 - [MetaMask](https://metamask.io/)
-- [Alchemy]([https://metamask.io/](https://dashboard.alchemy.com/)) 
+- [Alchemy](https://dashboard.alchemy.com/) 
 
 
 ## Setup Instructions
