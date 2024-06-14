@@ -41,4 +41,12 @@ This DApp allows users to vote securely and transparently on the Ethereum blockc
    - [Alchemy](https://www.alchemy.com/faucets)
    - [Infura](https://www.infura.io/faucet/sepolia)
    - [Google Cloud Web3](https://cloud.google.com/application/web3/)(recommended)
+     
+6. **create a .env file in root folder**
+
+   add the code below - the mnemonic required is the one given to you by metamask.
    
+   > Code  MNEMONIC="your mnemonic here"
+   > Code  ALCHEMY_API_KEY="your alchemy api key here"
+
+
