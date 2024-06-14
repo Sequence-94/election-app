@@ -7,20 +7,35 @@ This project is a decentralized application (DApp) for voting, developed and ini
 This DApp allows users to vote securely and transparently on the Ethereum blockchain. Initially developed and tested on a local Ganache blockchain, it has now been deployed on the Holesky testnet.
 
 ### Prerequisites
-
-- [Node.js](https://nodejs.org/)
-- [Truffle](https://www.trufflesuite.com/truffle)
-- [MetaMask](https://metamask.io/)
-- [Alchemy](https://dashboard.alchemy.com/) 
+- [MetaMask](https://chromewebstore.google.com/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn)
+- [Alchemy](https://dashboard.alchemy.com/)
+- 
 
 
 ## Setup Instructions
 
 1. **Create a "New App" on Alchemy**
     Pick any testnet Holesky or Sepolia - I picked Holesky arbirarily.
+   
    ![Screen Shot 2024-06-14 at 11 33](https://github.com/Sequence-94/election-app/assets/53806574/19263ea3-8bbc-48c7-bb5b-a9a587ab05fe)
-2. **Save the API Key(Remember this Key ID, as you will need it in future steps.)**
-   ![Screen Shot 2024-06-14 at 11 36](https://github.com/Sequence-94/election-app/assets/53806574/ac76ab53-d326-4fc5-a621-70cfa47b3b91)
+   
+3. **Save the API Key(Remember this API Key and HTTPS endpoint, as you will need them in future steps.)**
+   
+   ![Screen Shot 2024-06-14 at 11 46](https://github.com/Sequence-94/election-app/assets/53806574/b42926ac-01cb-441c-9f8e-e586dac95ddd)
 
 
+5. **Create a metamask account**
+   - nagivate to -> networks > Add a network > Add a network manually
+   
+   ![Screen Shot 2024-06-14 at 11 51](https://github.com/Sequence-94/election-app/assets/53806574/0dab21c3-0607-4fd3-a9a6-2ee1556f407b)
 
+    Depending on which testnet you picked you'll fill in the values accordingly.
+
+   - Add some **Fake Ethereum** from Faucet
+   
+   ![Screen Shot 2024-06-14 at 11 57](https://github.com/Sequence-94/election-app/assets/53806574/fd927760-c2d2-4e51-a3b8-65e2bb92297c)
+
+   - [Alchemy](https://www.alchemy.com/faucets)
+   - [Infura](https://www.infura.io/faucet/sepolia)
+   - [Google Cloud Web3](https://cloud.google.com/application/web3/)(recommended)
+   
