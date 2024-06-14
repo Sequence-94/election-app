@@ -1,4 +1,4 @@
-App = {
+var App = {
   web3Provider: null,
   contracts: {},
   account: '0x0',
@@ -8,19 +8,35 @@ App = {
   },
 
   initWeb3: function () {
-    // Check for injected web3 (MetaMask)
-    if (typeof web3 !== 'undefined') {
+    // Modern dapp browsers...
+    if (window.ethereum) {
       App.web3Provider = window.ethereum;
       web3 = new Web3(window.ethereum);
-      console.log("Using MetaMask Web3 Provider...");
-    } else {
-      // If no injected web3 instance is detected, fallback to localhost
+      try {
+        // Request account access
+        window.ethereum.request({ method: 'eth_requestAccounts' }).then(function () {
+          console.log("Using MetaMask Web3 Provider...");
+        });
+      } catch (error) {
+        // User denied account access...
+        console.error("User denied account access");
+      }
+    }
+    // Legacy dapp browsers...
+    else if (window.web3) {
+      App.web3Provider = window.web3.currentProvider;
+      web3 = new Web3(window.web3.currentProvider);
+      console.log("Using Legacy Web3 Provider...");
+    }
+    // If no injected web3 instance is detected, fallback to localhost
+    else {
       App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
       web3 = new Web3(App.web3Provider);
       console.log("Using Localhost Web3 Provider...");
     }
     return App.initContract();
   },
+
 
   initContract: function () {
     $.getJSON("Election.json", function (election) {

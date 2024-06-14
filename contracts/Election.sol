@@ -1,5 +1,5 @@
 //version of solidity we will be using
-pragma solidity >=0.4.22 <0.8.0;
+pragma solidity >=0.4.22 <0.8.20;
 
 //Declare a contract
 contract Election {
@@ -24,7 +24,7 @@ contract Election {
     //voted event
     //event votedEvent(uint indexed _candidateId);
 
-    constructor() public {
+    constructor() {
         addCandidate("Candidate 1");
         addCandidate("Candidate 2");
     }
@@ -48,6 +48,6 @@ contract Election {
         candidates[_candidateId].voteCount++;
 
         //trigger voted event
-        //emit votedEvent(_candidateId);
+        emit votedEvent(_candidateId);
     }
 }
