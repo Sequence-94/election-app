@@ -83,3 +83,53 @@ module.exports = {
   }
 };
 ```
+### Test 
+
+```
+truffle migrate --network holesky 
+```
+
+You should see the follwoing:
+
+![Screen Shot 2024-06-14 at 12 37](https://github.com/Sequence-94/election-app/assets/53806574/b7a4629c-3b2e-4293-be84-d4fe4c2c3253)
+
+![Screen Shot 2024-06-14 at 12 38](https://github.com/Sequence-94/election-app/assets/53806574/64b885f4-49c2-4140-b93a-86e1c11cfde3)
+
+**Confirm contract is on the Sepolia testnet blockchain with truffle console:**
+
+```
+truffle console --network sepolia 
+contract = await FundProjectForOwner.deployed()
+```
+You should see something like this:
+
+![Screen Shot 2024-06-14 at 12 43](https://github.com/Sequence-94/election-app/assets/53806574/e4630843-5d64-4feb-bc50-92637136586d)
+
+![Screen Shot 2024-06-14 at 12 43 - 2](https://github.com/Sequence-94/election-app/assets/53806574/1d7cfd65-dfc9-4b8b-ab39-d5dab2b27985)
+
+```
+contract.address
+```
+
+- You can view contract code on [Etherscan for holesky](https://holesky.etherscan.io/)
+- Replace sepolia with holesky if you went with that.
+
+Copy this output:
+
+![Screen Shot 2024-06-14 at 12 46](https://github.com/Sequence-94/election-app/assets/53806574/57221a18-166e-4f98-b27d-e220acf37cff)
+
+- example
+- 
+```
+https://sepolia.etherscan.io/address/0xB0a4724048f4EEf0a40FC0fF410FccF21Dd3FcfD
+```
+
+- You should see the output in green
+
+![Screen Shot 2024-06-14 at 12 53](https://github.com/Sequence-94/election-app/assets/53806574/15da8ab5-50c1-439c-96de-7d850c2b417c)
+
+
+
+
+
+
