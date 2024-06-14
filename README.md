@@ -53,8 +53,9 @@ This DApp allows users to vote securely and transparently on the Ethereum blockc
 
 7. **Don't forget to add .env inside the .gitignore file**
 
-8. ## Changes Required for Deployment on Holesky Testnet
-
+8. Changes Required for Deployment on Holesky Testnet
+   -run ```npm install dotenv @truffle/hdwallet-provider```
+   
 ### 1. `truffle-config.js`
 
 Updated to include the Holesky network configuration:
