@@ -83,7 +83,7 @@ module.exports = {
   }
 };
 ```
-### Test 
+### Deploy Contract To Testnet 
 
 ```
 truffle migrate --network holesky 
@@ -128,6 +128,20 @@ https://sepolia.etherscan.io/address/0xB0a4724048f4EEf0a40FC0fF410FccF21Dd3FcfD
 
 ![Screen Shot 2024-06-14 at 12 53](https://github.com/Sequence-94/election-app/assets/53806574/15da8ab5-50c1-439c-96de-7d850c2b417c)
 
+
+### Test App Using Testnet
+
+```
+npm run dev
+```
+Your application should pop up and metamask should come up to ask you for connection permission.
+
+You can then place our vote and metamask shoud come up once again to charge you to place a vote once that's done you' see the page will
+automatically update to show the vote for your candidate.
+
+![Screen Shot 2024-06-14 at 13 05](https://github.com/Sequence-94/election-app/assets/53806574/a0f87acc-f733-47bd-8b5b-542b27d08e3e)
+
+You can check etherscan to confirm that your vote was written to the blockchain. If you take a look at the 2nd to last screenshot you'll the vote went through.
 
 
 
