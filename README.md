@@ -46,7 +46,9 @@ This DApp allows users to vote securely and transparently on the Ethereum blockc
 
    add the code below - the mnemonic required is the one given to you by metamask.
    
-   > Code  MNEMONIC="your mnemonic here"
-   > Code  ALCHEMY_API_KEY="your alchemy api key here"
+```
+ MNEMONIC="your mnemonic here"
+ ALCHEMY_API_KEY="your alchemy api key here"
+```
 
 
