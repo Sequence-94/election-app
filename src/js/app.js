@@ -1,145 +1,102 @@
-var App = {
-  web3Provider: null,
-  contracts: {},
+import { web3, web3Provider } from './Web3Api';
+import Election from '../../build/contracts/Election.json';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '../css/app.css';
+
+const App = {
   account: '0x0',
+  contracts: {},
 
-  init: function () {
-    return App.initWeb3();
+  init: async function () {
+    await this.initWeb3();
+    await this.initContract();
   },
 
-  initWeb3: function () {
-    // Modern dapp browsers...
-    if (window.ethereum) {
-      App.web3Provider = window.ethereum;
-      web3 = new Web3(window.ethereum);
-      try {
-        // Request account access
-        window.ethereum.request({ method: 'eth_requestAccounts' }).then(function () {
-          console.log("Using MetaMask Web3 Provider...");
-        });
-      } catch (error) {
-        // User denied account access...
-        console.error("User denied account access");
-      }
-    }
-    // Legacy dapp browsers...
-    else if (window.web3) {
-      App.web3Provider = window.web3.currentProvider;
-      web3 = new Web3(window.web3.currentProvider);
-      console.log("Using Legacy Web3 Provider...");
-    }
-    // If no injected web3 instance is detected, fallback to localhost
-    else {
-      App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
-      web3 = new Web3(App.web3Provider);
-      console.log("Using Localhost Web3 Provider...");
-    }
-    return App.initContract();
+  initWeb3: async function () {
+    // Web3 is already initialized in Web3Api.js
+    return;
   },
 
+  initContract: async function () {
+    const contract = require('@truffle/contract');
+    App.contracts.Election = contract(Election);
+    App.contracts.Election.setProvider(web3Provider);
 
-  initContract: function () {
-    $.getJSON("Election.json", function (election) {
-      // Load the contract artifact
-      App.contracts.Election = TruffleContract(election);
-      // Set the provider for the contract
-      App.contracts.Election.setProvider(App.web3Provider);
-      console.log("Contract initialized...");
-      App.listenForEvents();
-      App.render();
-    });
+    await App.listenForEvents();
+    await App.render();
   },
 
-  // Listen for events emitted from the contract
-  listenForEvents: function () {
-    App.contracts.Election.deployed().then(function (instance) {
-      instance.votedEvent({}, {
-        fromBlock: 0,
-        toBlock: 'latest'
-      }).watch(function (error, event) {
-        console.log("event triggered", event)
-        // Reload when a new vote is recorded
+  listenForEvents: async function () {
+    const instance = await App.contracts.Election.deployed();
+    instance.votedEvent({}, {
+      fromBlock: 0,
+      toBlock: 'latest'
+    }).watch((error, event) => {
+      if (!error) {
+        console.log("Event triggered", event);
         App.render();
-      });
+      }
     });
   },
 
-  render: function () {
-    var electionInstance;
-    var loader = $("#loader");
-    var content = $("#content");
-    var candidateSelect = $('#candidatesSelect');
+  render: async function () {
+    const loader = $("#loader");
+    const content = $("#content");
+    const candidateSelect = $('#candidatesSelect');
 
     loader.show();
     content.hide();
 
-    // Load account data
-    web3.eth.getCoinbase(function (err, account) {
-      if (err === null) {
-        App.account = account;
-        $("#accountAddress").html("Your Account: " + account);
-      }
-    });
+    const accounts = await web3.eth.getAccounts();
+    App.account = accounts[0];
+    $("#accountAddress").html("Your Account: " + App.account);
 
-    // Load contract data
-    App.contracts.Election.deployed().then(function (instance) {
-      electionInstance = instance;
-      return electionInstance.candidatesCount();
-    }).then(function (candidatesCount) {
-      var candidatesResults = $("#candidatesResults");
-      candidatesResults.empty();
+    const electionInstance = await App.contracts.Election.deployed();
+    const candidatesCount = await electionInstance.candidatesCount();
 
-      candidateSelect.empty(); // Clear previous options
+    const candidatesResults = $("#candidatesResults");
+    candidatesResults.empty();
+    candidateSelect.empty(); // Clear previous options
 
-      for (var i = 1; i <= candidatesCount; i++) {
-        electionInstance.candidates(i).then(function (candidate) {
-          var id = candidate[0].toNumber();
-          var name = candidate[1];
-          var voteCount = candidate[2].toNumber();
-          // Console log candidate data
-          console.log("Candidate ID:", id, "Name:", name, "Vote Count:", voteCount);
+    for (let i = 1; i <= candidatesCount; i++) {
+      const candidate = await electionInstance.candidates(i);
+      const id = candidate[0].toNumber();
+      const name = candidate[1];
+      const voteCount = candidate[2].toNumber();
 
-          // Render candidate Result
-          var candidateTemplate = "<tr><th>" + id + "</th><td>" + name + "</td><td>" + voteCount + "</td></tr>";
-          $("#candidatesResults").append(candidateTemplate);
+      console.log("Candidate ID:", id, "Name:", name, "Vote Count:", voteCount);
 
-          // Add candidate as an option in the dropdown
-          var optionTag = "<option value='" + id + "'>" + name + "</option>";
-          candidateSelect.append(optionTag);
-        });
-      }
+      const candidateTemplate = `<tr><th>${id}</th><td>${name}</td><td>${voteCount}</td></tr>`;
+      candidatesResults.append(candidateTemplate);
 
-      return electionInstance.voters(App.account);
-    }).then(function (hasVoted) {
-      // Do not allow a user to vote
-      if (hasVoted) {
-        $('form').hide();
-      }
-      loader.hide();
-      content.show();
-    }).catch(function (error) {
-      console.error("Error rendering:", error);
-    });
+      const optionTag = `<option value='${id}'>${name}</option>`;
+      candidateSelect.append(optionTag);
+    }
+
+    const hasVoted = await electionInstance.voters(App.account);
+    if (hasVoted) {
+      $('form').hide();
+    }
+    loader.hide();
+    content.show();
   },
 
-  castVote: function () {
-    var candidateId = $('#candidatesSelect').val();
-    App.contracts.Election.deployed().then(function (instance) {
-      return instance.vote(candidateId, { from: App.account });
-    }).then(function (result) {
-      // Wait for votes to update
-      $("#content").hide();
-      $("#loader").show();
-      // Reload page to update results
-      window.location.reload();
-    }).catch(function (err) {
-      console.error("Error casting vote:", err);
-    });
+  castVote: async function () {
+    const candidateId = $('#candidatesSelect').val();
+    const instance = await App.contracts.Election.deployed();
+    await instance.vote(candidateId, { from: App.account });
+
+    $("#content").hide();
+    $("#loader").show();
+    window.location.reload();
   }
 };
 
-$(function () {
-  $(window).on('load', function () {
-    App.init();
-  });
+$(window).on('load', function () {
+  App.init();
+});
+
+$("#voteForm").on('submit', function (event) {
+  event.preventDefault();
+  App.castVote();
 });
