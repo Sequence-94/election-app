@@ -51,4 +51,18 @@ I downgraded my "ethers" to version 5.7.2 in the package.json then I removed nod
 ```
 npm install 
 ```
+4. Lambda Timed Out Error
+
+Cause:The lambda was not giving the program enough time to deploy the contract.
+
+Fixed it like this:
+![Screen Shot 2024-06-16 at 18 22](https://github.com/Sequence-94/election-app/assets/53806574/d28dcb80-b455-4e6f-a4db-b277db3a2c97)
+
+## success!
+
+contract was deployed successfuly and the deployment was returned address was returned. 
+
+![Screen Shot 2024-06-16 at 18 22 - 2](https://github.com/Sequence-94/election-app/assets/53806574/616c35bb-d097-473d-9e19-3753c23d5d13)
+
+
 
