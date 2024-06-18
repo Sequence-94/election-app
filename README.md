@@ -64,5 +64,50 @@ contract was deployed successfuly and the deployment was returned address was re
 
 ![Screen Shot 2024-06-16 at 18 22 - 2](https://github.com/Sequence-94/election-app/assets/53806574/616c35bb-d097-473d-9e19-3753c23d5d13)
 
+## Voting Logic Lambda Function
+
+returns the following:
+```
+{
+  "statusCode": 200,
+  "body": "{\"receipt\": {
+    \"to\": \"0x61788E032F9A5Ad119871e396F5F758a4f1AA726\",
+    \"from\": \"0xff70d2925fa8A0bcb6a56ca5258ae320750754de\",
+    \"contractAddress\": null,
+    \"transactionIndex\": 5,
+    \"gasUsed\": {
+      \"type\": \"BigNumber\",
+      \"hex\": \"0x010beb\"
+    },
+    \"logsBloom\": \"0x000000...\", // Bloom filter for logs
+    \"blockHash\": \"0x7d29596b513ad66869de9a5bda8fa91fc71513e3e55ef03473e049a7b09ea98c\",
+    \"transactionHash\": \"0x1d5d09b2eeea54b57cbc81193558e5044c496cc6e83f93ab2c04e7a9f70c9530\",
+    \"logs\": [], // Transaction logs (empty in this case)
+    \"blockNumber\": 1760304,
+    \"confirmations\": 1,
+    \"cumulativeGasUsed\": {
+      \"type\": \"BigNumber\",
+      \"hex\": \"0x03d4c7\"
+    },
+    \"effectiveGasPrice\": {
+      \"type\": \"BigNumber\",
+      \"hex\": \"0x93d5692a\"
+    },
+    \"status\": 1, // Transaction status (1 means success)
+    \"type\": 2,
+    \"byzantium\": true,
+    \"events\": [] // Event logs (empty in this case)
+  }}"
+}
+```
+This indicates that the vote was cast using the deployed contract - it's also visible on etherscan:
+
+![Screen Shot 2024-06-18 at 13 55](https://github.com/Sequence-94/election-app/assets/53806574/190c8395-c507-4575-8ebe-e123f0027202)
+
+The logic will not allow double voting as well:
+
+![Screen Shot 2024-06-18 at 13 51](https://github.com/Sequence-94/election-app/assets/53806574/9381daf5-2d7a-4c39-b263-3acf5bac1514)
+
+
 
 
