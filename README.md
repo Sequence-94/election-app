@@ -108,6 +108,9 @@ The logic will not allow double voting as well:
 
 ![Screen Shot 2024-06-18 at 13 51](https://github.com/Sequence-94/election-app/assets/53806574/9381daf5-2d7a-4c39-b263-3acf5bac1514)
 
+### Testing Voting-Lambda Function via API GATEWAY on POSTMAN
+
+![Screen Shot 2024-06-18 at 15 18](https://github.com/Sequence-94/election-app/assets/53806574/a4652d6a-6371-473a-bcf3-d6d54db7ccec)
 
 
 
