@@ -1,5 +1,5 @@
 {
-  "name": "election-voting-lambda",
+  "name": "election-dapp",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
