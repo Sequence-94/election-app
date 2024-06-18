@@ -110,6 +110,17 @@ The logic will not allow double voting as well:
 
 ### Testing Voting-Lambda Function via API GATEWAY on POSTMAN
 
+Error:
+```
+{
+"error": "network does not support ENS (operation="getResolver", network="unknown", code=UNSUPPORTED_OPERATION, version=providers/5.7.2)"
+}
+```
+
+Issue: This was due to the fact that I had a typo on my ethereum address 
+Resolution: copied ethereum address as is and pasted into postman body
+Result:
+
 ![Screen Shot 2024-06-18 at 15 18](https://github.com/Sequence-94/election-app/assets/53806574/a4652d6a-6371-473a-bcf3-d6d54db7ccec)
 
 
